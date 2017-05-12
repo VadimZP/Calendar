@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <style>
+    #calendar {
+        font-family: Arial;
+        font-weight: bold;
+        border: 1px solid #77C349;
+        width: 343px;
+        box-shadow: 10px 10px 20px #c3c3c3;
+    }
+    
+    .month {
+        color: #FFF;
+        background: #77C349;
+        text-transform: uppercase;
+        padding: 15px;
+        text-align: center;
+    }
+    
+    table {
+        background: #FEF102;
+        border-collapse: collapse;
+        border: 1px solid #77C349;
+    }
+    
+    td,
+    th {
+        padding: 15px;
+        text-align: center;
+    }
+    
+    th {
+        color: #fff;
+        background-color: #77C349;
+    }
+    
+    button {
+        margin: 0 10px;
+        box-shadow: 1px 1px 1px #407B29;
+    }
+    </style>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <script>
+    // —оздание каркаса таблицы 
+    var calendarDiv = document.createElement('div');
+    calendarDiv.id = 'calendar';
+    document.body.appendChild(calendarDiv);
+
+    var tableElem = document.createElement('table');
+    calendarDiv.appendChild(tableElem);
+
+    var divMonth = document.createElement('div');
+    divMonth.className = 'month';
+    calendarDiv.insertBefore(divMonth, tableElem);
+
+    divMonth.innerHTML = '<span>month</span>';
+
+    //√енераци€ €чеек дней недели(<th></th>) в первом р€де(<tr></tr>) 
+
+    var trElem = document.createElement('tr');
+    tableElem.appendChild(trElem);
+
+    var daysArr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+
+    for (var i = 0; i < daysArr.length; i++) {
+        var thElem = document.createElement('th');
+        thElem.innerHTML = daysArr[i];
+        trElem.appendChild(thElem);
+    }
+
+
+    //√енераци€ кнопок <button></button>
+
+    var nextMonth = document.createElement('button');
+    var prevMonth = document.createElement('button');
+    nextMonth.innerHTML = '&#11208';
+    prevMonth.innerHTML = '&#11207';
+    divMonth.appendChild(nextMonth);
+    divMonth.insertBefore(prevMonth, divMonth.firstChild);
+
+    var a = 0;
+    var b = 0;
+
+    nextMonth.onclick = function(e) {
+        var tr = document.querySelectorAll('tr');
+        for (var i = 1; i < tr.length; i++) {
+            tableElem.removeChild(tr[i]);
+        }
+
+        a += 1;
+        renderData(a)
+    }
+    prevMonth.onclick = function(e) {
+        var tr = document.querySelectorAll('tr');
+        for (var i = 1; i < tr.length; i++) {
+            tableElem.removeChild(tr[i]);
+        }
+
+        b += 1;
+        renderData(b)
+    }
+
+    function renderData() {
+        // ”становка даты
+
+        var currentDate = new Date(); // “екуща€ дата
+        var year = currentDate.getFullYear();
+        var todayMonth = currentDate.getMonth();
+        
+        var month = currentDate.getMonth() + a - b;
+
+        var day = currentDate.getDate();
+        currentDate = new Date(year, month, day);
+        var todayYear = currentDate.getFullYear();
+        console.log(month)
+        console.log(todayMonth)
+        currentDate.setDate(1);
+
+        var dayOfWeek = currentDate.getDay() - 1; //ѕервый день в мес€це (к примеру "пн")
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        currentDate.setDate(0);
+        var daysInMonth = currentDate.getDate(); // ол-во дней в текущем мес€це
+
+        if (dayOfWeek === -1) { //≈сли воскресение = -1, то заменить значение на 6
+            dayOfWeek = 6;
+        }
+
+        var monthes = ['€нварь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сент€брь', 'окт€брь', 'но€брь', 'декабрь'];
+        var currentMonth = currentDate.getMonth();
+
+        for (var i = 0; i < monthes.length; i++) {
+            if (i === currentMonth) divMonth.children[1].innerHTML = monthes[i] + " " + todayYear;
+        }
+
+        for (var rows = 0; rows < 6; rows++) {
+            var row = document.createElement('tr');
+            tableElem.appendChild(row);
+            row.innerHTML = "<td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> ";
+        }
+
+        var tdElem = document.querySelectorAll('td');
+        var lastRow = tableElem.lastElementChild;
+        var tdOfLastRow = tableElem.lastElementChild.children[0];
+
+        for (var i = 1; i < daysInMonth + 1; i++) {
+            tdElem[dayOfWeek++].innerHTML = i;
+        }
+
+        if (tdOfLastRow.innerHTML === '') {
+            tableElem.removeChild(lastRow);
+        }
+
+        for (var i = 0; i < tdElem.length; i++) {
+            if(month === todayMonth) {
+                 if (tdElem[i].innerHTML == day + '') tdElem[i].style.background = '#F48625';
+            }
+           
+        }
+
+    }
+
+    renderData()
+    </script>
+</body>
+
+</html>
