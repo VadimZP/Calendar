@@ -46,7 +46,7 @@
 
 <body>
     <script>
-    // Ñîçäàíèå êàðêàñà òàáëèöû 
+   // Создание каркаса таблицы 
     var calendarDiv = document.createElement('div');
     calendarDiv.id = 'calendar';
     document.body.appendChild(calendarDiv);
@@ -60,12 +60,12 @@
 
     divMonth.innerHTML = '<span>month</span>';
 
-    //Ãåíåðàöèÿ ÿ÷ååê äíåé íåäåëè(<th></th>) â ïåðâîì ðÿäå(<tr></tr>) 
+    //Генерация ячеек дней недели(<th></th>) в первом ряде(<tr></tr>) 
 
     var trElem = document.createElement('tr');
     tableElem.appendChild(trElem);
 
-    var daysArr = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
+    var daysArr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 
     for (var i = 0; i < daysArr.length; i++) {
         var thElem = document.createElement('th');
@@ -74,7 +74,7 @@
     }
 
 
-    //Ãåíåðàöèÿ êíîïîê <button></button>
+    //Генерация кнопок <button></button>
 
     var nextMonth = document.createElement('button');
     var prevMonth = document.createElement('button');
@@ -106,9 +106,9 @@
     }
 
     function renderData() {
-        // Óñòàíîâêà äàòû
+        // Установка даты
 
-        var currentDate = new Date(); // Òåêóùàÿ äàòà
+        var currentDate = new Date(); // Текущая дата
         var year = currentDate.getFullYear();
         var todayMonth = currentDate.getMonth();
         
@@ -121,16 +121,16 @@
         console.log(todayMonth)
         currentDate.setDate(1);
 
-        var dayOfWeek = currentDate.getDay() - 1; //Ïåðâûé äåíü â ìåñÿöå (ê ïðèìåðó "ïí")
+        var dayOfWeek = currentDate.getDay() - 1; //Первый день в месяце (к примеру "пн")
         currentDate.setMonth(currentDate.getMonth() + 1);
         currentDate.setDate(0);
-        var daysInMonth = currentDate.getDate(); //Êîë-âî äíåé â òåêóùåì ìåñÿöå
+        var daysInMonth = currentDate.getDate(); //Кол-во дней в текущем месяце
 
-        if (dayOfWeek === -1) { //Åñëè âîñêðåñåíèå = -1, òî çàìåíèòü çíà÷åíèå íà 6
+        if (dayOfWeek === -1) { //Если воскресение = -1, то заменить значение на 6
             dayOfWeek = 6;
         }
 
-        var monthes = ['ÿíâàðü', 'ôåâðàëü', 'ìàðò', 'àïðåëü', 'ìàé', 'èþíü', 'èþëü', 'àâãóñò', 'ñåíòÿáðü', 'îêòÿáðü', 'íîÿáðü', 'äåêàáðü'];
+        var monthes = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
         var currentMonth = currentDate.getMonth();
 
         for (var i = 0; i < monthes.length; i++) {
