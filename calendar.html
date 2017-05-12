@@ -46,7 +46,7 @@
 
 <body>
     <script>
-    // Создание каркаса таблицы 
+    // Г‘Г®Г§Г¤Г Г­ГЁГҐ ГЄГ Г°ГЄГ Г±Г  ГІГ ГЎГ«ГЁГ¶Г» 
     var calendarDiv = document.createElement('div');
     calendarDiv.id = 'calendar';
     document.body.appendChild(calendarDiv);
@@ -60,12 +60,12 @@
 
     divMonth.innerHTML = '<span>month</span>';
 
-    //Генерация ячеек дней недели(<th></th>) в первом ряде(<tr></tr>) 
+    //ГѓГҐГ­ГҐГ°Г Г¶ГЁГї ГїГ·ГҐГҐГЄ Г¤Г­ГҐГ© Г­ГҐГ¤ГҐГ«ГЁ(<th></th>) Гў ГЇГҐГ°ГўГ®Г¬ Г°ГїГ¤ГҐ(<tr></tr>) 
 
     var trElem = document.createElement('tr');
     tableElem.appendChild(trElem);
 
-    var daysArr = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+    var daysArr = ['РџРќ', 'Р’Рў', 'РЎР ', 'Р§Рў', 'РџРў', 'РЎР‘', 'Р’РЎ'];
 
     for (var i = 0; i < daysArr.length; i++) {
         var thElem = document.createElement('th');
@@ -74,7 +74,7 @@
     }
 
 
-    //Генерация кнопок <button></button>
+    //ГѓГҐГ­ГҐГ°Г Г¶ГЁГї ГЄГ­Г®ГЇГ®ГЄ <button></button>
 
     var nextMonth = document.createElement('button');
     var prevMonth = document.createElement('button');
@@ -106,9 +106,9 @@
     }
 
     function renderData() {
-        // Установка даты
+        // Г“Г±ГІГ Г­Г®ГўГЄГ  Г¤Г ГІГ»
 
-        var currentDate = new Date(); // Текущая дата
+        var currentDate = new Date(); // Г’ГҐГЄГіГ№Г Гї Г¤Г ГІГ 
         var year = currentDate.getFullYear();
         var todayMonth = currentDate.getMonth();
         
@@ -121,16 +121,16 @@
         console.log(todayMonth)
         currentDate.setDate(1);
 
-        var dayOfWeek = currentDate.getDay() - 1; //Первый день в месяце (к примеру "пн")
+        var dayOfWeek = currentDate.getDay() - 1; //ГЏГҐГ°ГўГ»Г© Г¤ГҐГ­Гј Гў Г¬ГҐГ±ГїГ¶ГҐ (ГЄ ГЇГ°ГЁГ¬ГҐГ°Гі "ГЇГ­")
         currentDate.setMonth(currentDate.getMonth() + 1);
         currentDate.setDate(0);
-        var daysInMonth = currentDate.getDate(); //Кол-во дней в текущем месяце
+        var daysInMonth = currentDate.getDate(); //ГЉГ®Г«-ГўГ® Г¤Г­ГҐГ© Гў ГІГҐГЄГіГ№ГҐГ¬ Г¬ГҐГ±ГїГ¶ГҐ
 
-        if (dayOfWeek === -1) { //Если воскресение = -1, то заменить значение на 6
+        if (dayOfWeek === -1) { //Г…Г±Г«ГЁ ГўГ®Г±ГЄГ°ГҐГ±ГҐГ­ГЁГҐ = -1, ГІГ® Г§Г Г¬ГҐГ­ГЁГІГј Г§Г­Г Г·ГҐГ­ГЁГҐ Г­Г  6
             dayOfWeek = 6;
         }
 
-        var monthes = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь'];
+        var monthes = ['ГїГ­ГўГ Г°Гј', 'ГґГҐГўГ°Г Г«Гј', 'Г¬Г Г°ГІ', 'Г ГЇГ°ГҐГ«Гј', 'Г¬Г Г©', 'ГЁГѕГ­Гј', 'ГЁГѕГ«Гј', 'Г ГўГЈГіГ±ГІ', 'Г±ГҐГ­ГІГїГЎГ°Гј', 'Г®ГЄГІГїГЎГ°Гј', 'Г­Г®ГїГЎГ°Гј', 'Г¤ГҐГЄГ ГЎГ°Гј'];
         var currentMonth = currentDate.getMonth();
 
         for (var i = 0; i < monthes.length; i++) {
